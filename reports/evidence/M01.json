@@ -1,0 +1,57 @@
+{
+  "scenario_id": "M01",
+  "sandbox_name": "sbx-50943e75",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 24.35,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_dcdd75dc929d",
+  "score": {
+    "label_ok": true,
+    "window_ok": false,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2001-01-31",
+        "2001-01-30",
+        "2001-03-31",
+        "2001-05-31",
+        "2001-08-31",
+        "2001-10-31",
+        "2004-01-31",
+        "2004-01-30",
+        "2004-03-31",
+        "2004-05-31"
+      ],
+      "suspect_line": 4,
+      "reason": "add_month keeps the original day, causing invalid dates when the next month has fewer days",
+      "fallback": false
+    },
+    "experiments": 42,
+    "cited_line": 4,
+    "verdict": "date_bug",
+    "first_failure": "2001-01-29",
+    "last_failure": "2004-05-31",
+    "recovery": "2004-06-01",
+    "tested": {
+      "2001-01-29": "fail",
+      "2001-01-30": "fail",
+      "2001-01-31": "fail",
+      "2001-03-31": "fail",
+      "2001-05-31": "fail",
+      "2001-08-31": "fail",
+      "2001-10-31": "fail",
+      "2004-01-30": "fail",
+      "2004-01-31": "fail",
+      "2004-03-31": "fail",
+      "2004-05-30": "pass",
+      "2004-05-31": "fail",
+      "2004-06-01": "pass",
+      "2027-06-15": "pass"
+    }
+  },
+  "replay": "faketime \"2001-01-29 12:00:00\" python3 fixtures/M01/app.py"
+}

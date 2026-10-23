@@ -1,0 +1,59 @@
+{
+  "scenario_id": "E02",
+  "sandbox_name": "sbx-b7ef4022",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 12.4,
+  "env_failure": false,
+  "verdict": "date_bug_candidate",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": true,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2038-01-15",
+        "2038-01-16",
+        "2038-01-17",
+        "2038-01-18",
+        "2038-01-19",
+        "2038-01-20",
+        "2038-01-21",
+        "2038-01-22",
+        "2038-01-23",
+        "2038-01-24"
+      ],
+      "suspect_line": 4,
+      "reason": "Line 4 only checks the upper 32\u2011bit signed limit, so timestamps on 2038\u201101\u201119 exceed 2\u00b3\u00b9 and trigger the overflow assertion.",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": 4,
+    "verdict": "date_bug_candidate",
+    "first_failure": "2038-01-19",
+    "last_failure": "2038-01-25",
+    "recovery": null,
+    "why": "mixed outcomes observed; independent causal confirmation pending",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-28": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "pass",
+      "2038-01-15": "pass",
+      "2038-01-16": "pass",
+      "2038-01-17": "pass",
+      "2038-01-18": "pass",
+      "2038-01-19": "fail",
+      "2038-01-20": "fail",
+      "2038-01-21": "fail",
+      "2038-01-22": "fail",
+      "2038-01-23": "fail",
+      "2038-01-24": "fail",
+      "2038-01-25": "fail"
+    }
+  },
+  "replay": "faketime \"2038-01-19 12:00:00\" python3 fixtures/E02/app.py"
+}

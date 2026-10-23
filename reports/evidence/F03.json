@@ -1,0 +1,51 @@
+{
+  "scenario_id": "F03",
+  "sandbox_name": "sbx-7510908d",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 31.53,
+  "env_failure": false,
+  "verdict": "not_date_bug",
+  "computer_id": "cmp_c8ccf385f03c",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-01-01",
+        "2000-01-02",
+        "2000-01-03",
+        "2000-01-04",
+        "2000-01-05",
+        "2000-01-06",
+        "2000-01-07",
+        "2000-01-08",
+        "2000-01-09",
+        "2000-01-10"
+      ],
+      "suspect_line": 3,
+      "reason": "At 12:00:00 the total seconds since the epoch are always a multiple of 3, making the assert always fail.",
+      "fallback": false
+    },
+    "experiments": 33,
+    "cited_line": 3,
+    "verdict": "not_date_bug",
+    "why": "flaky",
+    "tested": {
+      "2027-06-15": "flaky",
+      "2000-01-01": "flaky",
+      "2000-01-02": "flaky",
+      "2000-01-03": "pass",
+      "2000-01-04": "flaky",
+      "2000-01-05": "flaky",
+      "2000-01-06": "pass",
+      "2000-01-07": "flaky",
+      "2000-01-08": "flaky",
+      "2000-01-09": "pass",
+      "2000-01-10": "flaky"
+    }
+  }
+}

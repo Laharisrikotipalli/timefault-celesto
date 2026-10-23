@@ -1,0 +1,100 @@
+{
+  "scenarios_expected": 7,
+  "scenarios_found": 7,
+  "successful_scenarios": 7,
+  "environment_failures": 0,
+  "scenario_results": [
+    {
+      "scenario_id": "C01",
+      "success": true,
+      "verdict": "clean",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": null,
+        "line_ok": null
+      },
+      "experiments": 42,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "C02",
+      "success": true,
+      "verdict": "clean",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": null,
+        "line_ok": null
+      },
+      "experiments": 45,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "C03",
+      "success": true,
+      "verdict": "clean",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": null,
+        "line_ok": null
+      },
+      "experiments": 45,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "C04",
+      "success": true,
+      "verdict": "clean",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": null,
+        "line_ok": null
+      },
+      "experiments": 39,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "E01",
+      "success": true,
+      "verdict": "date_bug_candidate",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": true,
+        "line_ok": true
+      },
+      "experiments": 24,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "E02",
+      "success": true,
+      "verdict": "date_bug_candidate",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": true,
+        "line_ok": true
+      },
+      "experiments": 45,
+      "wall_clock_s": null
+    },
+    {
+      "scenario_id": "F01",
+      "success": true,
+      "verdict": "not_date_bug",
+      "env_failure": false,
+      "score": {
+        "label_ok": true,
+        "window_ok": null,
+        "line_ok": null
+      },
+      "experiments": 42,
+      "wall_clock_s": null
+    }
+  ],
+  "note": "Aggregated from existing per-scenario evidence; no benchmarks rerun."
+}

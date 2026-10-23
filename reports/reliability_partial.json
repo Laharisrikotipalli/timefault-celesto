@@ -1,0 +1,19 @@
+{
+  "run_count": 1,
+  "runs": [
+    {
+      "sandbox_name": "sbx-b4cd5126",
+      "fresh": false,
+      "success": true,
+      "wall_clock_s": 316.02,
+      "boot_to_ready_s": 11.79,
+      "cost_usd": 0.001317
+    }
+  ],
+  "success_rate": 1.0,
+  "median_wall_clock_s": 316.02,
+  "p90_wall_clock_s": 316.02,
+  "median_boot_to_ready_s": 11.79,
+  "total_cost_usd": 0.001317,
+  "postmortem_path": "reports/postmortem.md"
+}

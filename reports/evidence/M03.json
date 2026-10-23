@@ -1,0 +1,56 @@
+{
+  "scenario_id": "M03",
+  "sandbox_name": "sbx-8a1e148e",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 23.51,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_db1a542c446a",
+  "score": {
+    "label_ok": true,
+    "window_ok": false,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-02-01",
+        "2001-02-01",
+        "2004-02-01",
+        "2023-02-01",
+        "2024-02-01",
+        "2096-02-01",
+        "2100-02-01",
+        "2104-02-01",
+        "2200-02-01"
+      ],
+      "suspect_line": 5,
+      "reason": "last_day returns 30 for February, ignoring the correct 28/29 days",
+      "fallback": false
+    },
+    "experiments": 42,
+    "cited_line": 5,
+    "verdict": "date_bug",
+    "first_failure": "2000-02-01",
+    "last_failure": "2200-02-02",
+    "recovery": null,
+    "tested": {
+      "2000-01-31": "pass",
+      "2000-02-01": "fail",
+      "2000-02-02": "fail",
+      "2001-02-01": "fail",
+      "2004-02-01": "fail",
+      "2023-02-01": "fail",
+      "2024-02-01": "fail",
+      "2027-06-15": "pass",
+      "2096-02-01": "fail",
+      "2100-02-01": "fail",
+      "2104-02-01": "fail",
+      "2200-01-31": "pass",
+      "2200-02-01": "fail",
+      "2200-02-02": "fail"
+    }
+  },
+  "replay": "faketime \"2000-02-01 12:00:00\" python3 fixtures/M03/app.py"
+}

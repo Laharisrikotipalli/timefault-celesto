@@ -1,0 +1,58 @@
+{
+  "scenario_id": "M02",
+  "sandbox_name": "sbx-6d6a2d13",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 29.24,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_24d06de3283a",
+  "score": {
+    "label_ok": true,
+    "window_ok": false,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-12-15",
+        "2001-12-01",
+        "2025-12-31",
+        "2030-12-10",
+        "2045-12-20",
+        "2060-12-05",
+        "2075-12-30",
+        "2099-12-12",
+        "2111-12-25",
+        "2199-12-31"
+      ],
+      "suspect_line": 4,
+      "reason": "month+1 becomes 13 in December, causing an invalid date",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": 4,
+    "verdict": "date_bug",
+    "first_failure": "2000-12-14",
+    "last_failure": "2199-12-31",
+    "recovery": "2200-01-01",
+    "tested": {
+      "2000-12-14": "fail",
+      "2000-12-15": "fail",
+      "2000-12-16": "fail",
+      "2001-12-01": "fail",
+      "2025-12-31": "fail",
+      "2027-06-15": "pass",
+      "2030-12-10": "fail",
+      "2045-12-20": "fail",
+      "2060-12-05": "fail",
+      "2075-12-30": "fail",
+      "2099-12-12": "fail",
+      "2111-12-25": "fail",
+      "2199-12-30": "fail",
+      "2199-12-31": "fail",
+      "2200-01-01": "pass"
+    }
+  },
+  "replay": "faketime \"2000-12-14 12:00:00\" python3 fixtures/M02/app.py"
+}

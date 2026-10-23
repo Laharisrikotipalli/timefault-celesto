@@ -1,0 +1,53 @@
+{
+  "scenario_id": "C01",
+  "sandbox_name": "sbx-1473348a",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 11.2,
+  "env_failure": false,
+  "verdict": "clean",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-02-29",
+        "2004-02-29",
+        "2008-02-29",
+        "2012-02-29",
+        "2016-02-29",
+        "2020-02-29",
+        "2024-02-29",
+        "2028-02-29",
+        "2032-02-29",
+        "2096-02-29"
+      ],
+      "suspect_line": 5,
+      "reason": "Line 5 assumes the same month/day exists in the next year, raising ValueError for Feb\u202f29 on non\u2011leap years.",
+      "fallback": false
+    },
+    "experiments": 42,
+    "cited_line": 5,
+    "verdict": "clean",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-28": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "pass",
+      "2038-01-19": "pass",
+      "2000-02-29": "pass",
+      "2004-02-29": "pass",
+      "2008-02-29": "pass",
+      "2012-02-29": "pass",
+      "2016-02-29": "pass",
+      "2020-02-29": "pass",
+      "2024-02-29": "pass",
+      "2032-02-29": "pass",
+      "2096-02-29": "pass"
+    }
+  }
+}

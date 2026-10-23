@@ -1,0 +1,54 @@
+{
+  "scenario_id": "C03",
+  "sandbox_name": "sbx-d931804f",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 35.6,
+  "env_failure": false,
+  "verdict": "clean",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-02-29",
+        "2001-01-01",
+        "2001-12-31",
+        "2099-12-31",
+        "2100-02-28",
+        "2100-12-31",
+        "2104-02-29",
+        "2199-12-31",
+        "2200-02-28",
+        "2200-12-31"
+      ],
+      "suspect_line": null,
+      "reason": "The assertions correctly handle leap\u2011year calculations and month lengths, so no date\u2011dependent bug is evident.",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": null,
+    "verdict": "clean",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-28": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "pass",
+      "2038-01-19": "pass",
+      "2000-02-29": "pass",
+      "2001-01-01": "pass",
+      "2001-12-31": "pass",
+      "2099-12-31": "pass",
+      "2100-02-28": "pass",
+      "2100-12-31": "pass",
+      "2104-02-29": "pass",
+      "2199-12-31": "pass",
+      "2200-02-28": "pass",
+      "2200-12-31": "pass"
+    }
+  }
+}

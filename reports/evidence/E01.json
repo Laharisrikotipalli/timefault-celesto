@@ -1,0 +1,43 @@
+{
+  "scenario_id": "E01",
+  "sandbox_name": "sbx-2f959282",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 9.75,
+  "env_failure": false,
+  "verdict": "date_bug_candidate",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": true,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2028-06-01"
+      ],
+      "suspect_line": 7,
+      "reason": "The comparison uses <= while the assertion expects <, causing a mismatch when the date equals the expiration date.",
+      "fallback": false
+    },
+    "experiments": 24,
+    "cited_line": 7,
+    "verdict": "date_bug_candidate",
+    "first_failure": "2028-06-01",
+    "last_failure": "2028-06-01",
+    "recovery": "2028-06-02",
+    "why": "mixed outcomes observed; independent causal confirmation pending",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-28": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "pass",
+      "2028-05-31": "pass",
+      "2028-06-01": "fail",
+      "2028-06-02": "pass",
+      "2038-01-19": "pass"
+    }
+  },
+  "replay": "faketime \"2028-06-01 12:00:00\" python3 fixtures/E01/app.py"
+}

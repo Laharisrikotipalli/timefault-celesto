@@ -1,0 +1,55 @@
+{
+  "scenario_id": "E04",
+  "sandbox_name": "sbx-912a53ff",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 32.49,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_a0315cfa47d5",
+  "score": {
+    "label_ok": true,
+    "window_ok": true,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2069-01-01",
+        "2070-06-15",
+        "2099-12-31",
+        "2100-01-01",
+        "2101-07-04",
+        "2168-12-31",
+        "2169-03-01",
+        "2199-12-31",
+        "2200-01-01"
+      ],
+      "suspect_line": 5,
+      "reason": "Using %y truncates the century, causing strptime to misinterpret years where the two\u2011digit year maps to the wrong century.",
+      "fallback": false
+    },
+    "experiments": 39,
+    "cited_line": 5,
+    "verdict": "date_bug",
+    "first_failure": "2069-01-01",
+    "last_failure": "2200-01-02",
+    "recovery": null,
+    "tested": {
+      "2027-06-15": "pass",
+      "2068-12-31": "pass",
+      "2069-01-01": "fail",
+      "2069-01-02": "fail",
+      "2070-06-15": "fail",
+      "2099-12-31": "fail",
+      "2100-01-01": "fail",
+      "2101-07-04": "fail",
+      "2168-12-31": "fail",
+      "2169-03-01": "fail",
+      "2199-12-31": "fail",
+      "2200-01-01": "fail",
+      "2200-01-02": "fail"
+    }
+  },
+  "replay": "faketime \"2069-01-01 12:00:00\" python3 fixtures/E04/app.py"
+}

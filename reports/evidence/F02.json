@@ -1,0 +1,30 @@
+{
+  "scenario_id": "F02",
+  "sandbox_name": "sbx-d648c585",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 27.96,
+  "env_failure": false,
+  "verdict": "not_date_bug",
+  "computer_id": "cmp_350e7b152505",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [],
+      "suspect_line": null,
+      "reason": "The script contains no date handling logic, so no specific dates can trigger a failure.",
+      "fallback": false
+    },
+    "experiments": 3,
+    "cited_line": null,
+    "verdict": "not_date_bug",
+    "why": "fails on every date",
+    "tested": {
+      "2027-06-15": "fail"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "scenario_id": "F04",
+  "sandbox_name": "sbx-fd798eb8",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 27.95,
+  "env_failure": false,
+  "verdict": "not_date_bug",
+  "computer_id": "cmp_6a585e347ecb",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-01-01",
+        "2001-02-28",
+        "2004-02-29",
+        "2099-12-31",
+        "2100-01-01",
+        "2100-02-28",
+        "2100-03-01",
+        "2199-12-31",
+        "2200-01-01",
+        "2104-02-29"
+      ],
+      "suspect_line": 3,
+      "reason": "The assertion incorrectly requires the current year to be 1999, causing a failure on any other date.",
+      "fallback": false
+    },
+    "experiments": 33,
+    "cited_line": 3,
+    "verdict": "not_date_bug",
+    "why": "fails on every date",
+    "tested": {
+      "2027-06-15": "fail",
+      "2000-01-01": "fail",
+      "2001-02-28": "fail",
+      "2004-02-29": "fail",
+      "2099-12-31": "fail",
+      "2100-01-01": "fail",
+      "2100-02-28": "fail",
+      "2100-03-01": "fail",
+      "2199-12-31": "fail",
+      "2200-01-01": "fail",
+      "2104-02-29": "fail"
+    }
+  }
+}

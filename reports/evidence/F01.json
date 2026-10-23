@@ -1,0 +1,54 @@
+{
+  "scenario_id": "F01",
+  "sandbox_name": "sbx-000af9cc",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 11.24,
+  "env_failure": false,
+  "verdict": "not_date_bug",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-02-29",
+        "2024-02-29",
+        "2100-02-28",
+        "2099-12-31",
+        "2100-01-01",
+        "2038-01-19",
+        "2012-03-25",
+        "2025-04-01",
+        "2077-07-07",
+        "2200-12-31"
+      ],
+      "suspect_line": null,
+      "reason": "The program contains no date-dependent logic, so no line is likely to cause date-triggered failures.",
+      "fallback": false
+    },
+    "experiments": 42,
+    "cited_line": null,
+    "verdict": "not_date_bug",
+    "why": "intermittent failures observed without apparent date/time logic",
+    "tested": {
+      "2027-06-15": "flaky",
+      "2028-02-28": "flaky",
+      "2028-02-29": "flaky",
+      "2028-03-01": "flaky",
+      "2038-01-19": "flaky",
+      "2000-02-29": "flaky",
+      "2024-02-29": "pass",
+      "2100-02-28": "flaky",
+      "2099-12-31": "pass",
+      "2100-01-01": "flaky",
+      "2012-03-25": "pass",
+      "2025-04-01": "flaky",
+      "2077-07-07": "pass",
+      "2200-12-31": "pass"
+    }
+  }
+}
