@@ -1,0 +1,58 @@
+{
+  "scenario_id": "M04",
+  "sandbox_name": "sbx-bf7f918c",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 27.45,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_41a017dd1009",
+  "score": {
+    "label_ok": true,
+    "window_ok": false,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2001-02-28",
+        "2004-02-29",
+        "2001-04-30",
+        "2001-06-30",
+        "2001-09-30",
+        "2001-11-30",
+        "2002-02-28",
+        "2008-02-29",
+        "2023-04-30",
+        "2023-06-30"
+      ],
+      "suspect_line": 5,
+      "reason": "billing_due defaults to day 31, so the assertion fails on months whose last day is not 31.",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": 5,
+    "verdict": "date_bug",
+    "first_failure": "2001-02-28",
+    "last_failure": "2023-06-30",
+    "recovery": "2023-07-01",
+    "tested": {
+      "2001-02-27": "pass",
+      "2001-02-28": "fail",
+      "2001-03-01": "pass",
+      "2001-04-30": "fail",
+      "2001-06-30": "fail",
+      "2001-09-30": "fail",
+      "2001-11-30": "fail",
+      "2002-02-28": "fail",
+      "2004-02-29": "fail",
+      "2008-02-29": "fail",
+      "2023-04-30": "fail",
+      "2023-06-29": "pass",
+      "2023-06-30": "fail",
+      "2023-07-01": "pass",
+      "2027-06-15": "pass"
+    }
+  },
+  "replay": "faketime \"2001-02-28 12:00:00\" python3 fixtures/M04/app.py"
+}

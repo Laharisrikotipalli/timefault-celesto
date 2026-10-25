@@ -1,0 +1,15 @@
+{
+  "test": "http_api_smoke_test",
+  "result": "passed",
+  "checks": {
+    "health": true,
+    "post_run": true,
+    "list_runs": true
+  },
+  "run_id": "76b4d9a1-4285-4165-a07a-6e9f82a02129",
+  "backend": "local JSONL ledger",
+  "limitations": [
+    "PostgreSQL connectivity and persistence are not tested.",
+    "The created API-SMOKE-TEST record remains in reports/api_runs.jsonl."
+  ]
+}

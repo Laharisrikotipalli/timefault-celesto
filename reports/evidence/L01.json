@@ -1,0 +1,58 @@
+{
+  "scenario_id": "L01",
+  "sandbox_name": "sbx-81ae2d31",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 27.72,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_02485bd84daa",
+  "score": {
+    "label_ok": true,
+    "window_ok": false,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-02-29",
+        "2004-02-29",
+        "2008-02-29",
+        "2012-02-29",
+        "2016-02-29",
+        "2020-02-29",
+        "2024-02-29",
+        "2028-02-29",
+        "2032-02-29",
+        "2036-02-29"
+      ],
+      "suspect_line": 5,
+      "reason": "replace() raises ValueError for Feb\u202f29 when the following year is not a leap year",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": 5,
+    "verdict": "date_bug",
+    "first_failure": "2000-02-29",
+    "last_failure": "2036-02-29",
+    "recovery": "2036-03-01",
+    "tested": {
+      "2000-02-28": "pass",
+      "2000-02-29": "fail",
+      "2000-03-01": "pass",
+      "2004-02-29": "fail",
+      "2008-02-29": "fail",
+      "2012-02-29": "fail",
+      "2016-02-29": "fail",
+      "2020-02-29": "fail",
+      "2024-02-29": "fail",
+      "2027-06-15": "pass",
+      "2028-02-29": "fail",
+      "2032-02-29": "fail",
+      "2036-02-28": "pass",
+      "2036-02-29": "fail",
+      "2036-03-01": "pass"
+    }
+  },
+  "replay": "faketime \"2000-02-29 12:00:00\" python3 fixtures/L01/app.py"
+}

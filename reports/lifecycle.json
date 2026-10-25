@@ -1,0 +1,33 @@
+{
+  "test": "mocked_guest_lifecycle_cleanup",
+  "result": "passed",
+  "guest_created_by_mock": true,
+  "cleanup_called": true,
+  "events": [
+    {
+      "operation": "create",
+      "target": null
+    },
+    {
+      "operation": "exec",
+      "target": "mock-lifecycle-guest"
+    },
+    {
+      "operation": "exec",
+      "target": "mock-lifecycle-guest"
+    },
+    {
+      "operation": "exec",
+      "target": "mock-lifecycle-guest"
+    },
+    {
+      "operation": "delete",
+      "target": "mock-lifecycle-guest"
+    }
+  ],
+  "limitations": [
+    "All Celesto CLI operations were mocked.",
+    "No real cloud guest was created or deleted.",
+    "Ctrl-C behavior and actual cloud deletion were not tested."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "test": "host_side_command_containment",
+  "timestamp_utc": "2026-10-23T15:30:04.643685+00:00",
+  "command_tested": "rm -rf /",
+  "result": "passed",
+  "blocked_by_host_guard": true,
+  "guest_execution_attempted": false,
+  "audit_record_verified": true,
+  "method": "Called the real run_one.run safety guard while replacing the Celesto CLI function with a test function that raises if called.",
+  "limitations": [
+    "This validates the local guard and audit record, not isolation inside the guest or every possible command bypass."
+  ]
+}

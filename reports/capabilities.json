@@ -1,0 +1,39 @@
+{
+  "project": "TimeFault AI",
+  "capabilities": [
+    {
+      "id": "date_simulation",
+      "name": "Controlled date simulation",
+      "description": "Runs Python clock probes and fixture programs under faketime in a Celesto cloud sandbox.",
+      "implementation": "agent/investigate.py",
+      "status": "implemented"
+    },
+    {
+      "id": "candidate_date_investigation",
+      "name": "Candidate-date investigation",
+      "description": "Combines predefined boundary dates with LLM-suggested dates, tests outcomes, and records the observed date statuses.",
+      "implementation": "agent/investigate.py",
+      "status": "implemented"
+    },
+    {
+      "id": "repeated_execution",
+      "name": "Repeated fixture execution",
+      "description": "Repeats each date's fixture execution to identify consistent pass/fail outcomes and mixed results.",
+      "implementation": "agent/investigate.py",
+      "status": "implemented"
+    },
+    {
+      "id": "benchmark_evidence",
+      "name": "Benchmark evidence and oracle scoring",
+      "description": "Records scenario results and compares verdict labels with the expected labels in the oracle.",
+      "implementation": "agent/run_benchmark.py",
+      "status": "implemented"
+    }
+  ],
+  "not_yet_verified": [
+    "Containment test",
+    "Failure-policy drill",
+    "Concurrency test",
+    "HTTP API and database integration"
+  ]
+}

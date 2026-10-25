@@ -1,0 +1,11 @@
+{
+  "test": "simulated_runtime_setup_failure_cleanup",
+  "result": "passed",
+  "simulated_failure": "runtime setup or verification failed",
+  "environment_failure_recorded": true,
+  "cleanup_called": true,
+  "real_cloud_guest_used": false,
+  "limitations": [
+    "Mocks verify cleanup control flow, not real Celesto deletion or Ctrl-C behavior."
+  ]
+}

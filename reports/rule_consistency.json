@@ -1,0 +1,65 @@
+{
+ "L01": {
+  "rule_consistent": true,
+  "n_fail": 10,
+  "n_pass": 5,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "L02": {
+  "rule_consistent": true,
+  "n_fail": 14,
+  "n_pass": 1,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "L03": {
+  "rule_consistent": true,
+  "n_fail": 10,
+  "n_pass": 5,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "M01": {
+  "rule_consistent": true,
+  "n_fail": 11,
+  "n_pass": 3,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "M02": {
+  "rule_consistent": true,
+  "n_fail": 13,
+  "n_pass": 2,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "M03": {
+  "rule_consistent": true,
+  "n_fail": 11,
+  "n_pass": 3,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ },
+ "M04": {
+  "rule_consistent": true,
+  "n_fail": 10,
+  "n_pass": 5,
+  "violations_fail": [],
+  "violations_pass": [],
+  "rule_verified_against_fixture": true,
+  "original_window_ok": false
+ }
+}

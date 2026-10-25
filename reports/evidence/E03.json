@@ -1,0 +1,38 @@
+{
+  "scenario_id": "E03",
+  "sandbox_name": "sbx-5a747b73",
+  "fresh": true,
+  "success": true,
+  "boot_to_ready_s": 29.92,
+  "env_failure": false,
+  "verdict": "date_bug",
+  "computer_id": "cmp_8acde3ac4391",
+  "score": {
+    "label_ok": true,
+    "window_ok": true,
+    "line_ok": true
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2028-03-01"
+      ],
+      "suspect_line": 6,
+      "reason": "Off\u2011by\u2011one error: using >= instead of > makes the check differ on the exact LICENSE_END day.",
+      "fallback": false
+    },
+    "experiments": 12,
+    "cited_line": 6,
+    "verdict": "date_bug",
+    "first_failure": "2028-03-01",
+    "last_failure": "2028-03-01",
+    "recovery": "2028-03-02",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "fail",
+      "2028-03-02": "pass"
+    }
+  },
+  "replay": "faketime \"2028-03-01 12:00:00\" python3 fixtures/E03/app.py"
+}

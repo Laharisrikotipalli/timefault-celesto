@@ -1,0 +1,54 @@
+{
+  "scenario_id": "C02",
+  "sandbox_name": "sbx-b4cea1ad",
+  "fresh": false,
+  "success": true,
+  "boot_to_ready_s": 12.87,
+  "env_failure": false,
+  "verdict": "clean",
+  "computer_id": "cmp_563dcef34a0d",
+  "score": {
+    "label_ok": true,
+    "window_ok": null,
+    "line_ok": null
+  },
+  "result": {
+    "plan": {
+      "dates": [
+        "2000-01-31",
+        "2000-02-29",
+        "2001-01-31",
+        "2001-02-28",
+        "2096-02-29",
+        "2099-12-31",
+        "2100-01-31",
+        "2100-02-28",
+        "2100-12-31",
+        "2099-02-28"
+      ],
+      "suspect_line": 5,
+      "reason": "The month\u2011increment logic may mishandle end\u2011of\u2011month dates (especially February in leap and non\u2011leap years) causing incorrect day values.",
+      "fallback": false
+    },
+    "experiments": 45,
+    "cited_line": 5,
+    "verdict": "clean",
+    "tested": {
+      "2027-06-15": "pass",
+      "2028-02-28": "pass",
+      "2028-02-29": "pass",
+      "2028-03-01": "pass",
+      "2038-01-19": "pass",
+      "2000-01-31": "pass",
+      "2000-02-29": "pass",
+      "2001-01-31": "pass",
+      "2001-02-28": "pass",
+      "2096-02-29": "pass",
+      "2099-12-31": "pass",
+      "2100-01-31": "pass",
+      "2100-02-28": "pass",
+      "2100-12-31": "pass",
+      "2099-02-28": "pass"
+    }
+  }
+}

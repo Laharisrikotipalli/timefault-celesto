@@ -1,0 +1,16 @@
+{
+  "project": "TimeFault AI",
+  "problem_statement": "Date-sensitive software defects can be difficult to reproduce because behavior changes at specific calendar or timestamp boundaries.",
+  "objective": "Investigate candidate dates in a controlled execution environment, record observed outcomes, and produce evidence that helps reproduce potential date-related failures.",
+  "approach": [
+    "Inspect source code and request candidate dates from an LLM.",
+    "Use faketime to simulate candidate dates in a sandbox.",
+    "Repeat executions to distinguish consistent outcomes from flaky results.",
+    "Classify observed behavior and retain per-scenario JSON evidence."
+  ],
+  "limitations": [
+    "Initial date sampling includes predefined boundary dates and LLM suggestions.",
+    "A date_bug_candidate verdict is evidence for further investigation, not proof of causation.",
+    "Results depend on sandbox availability and successful clock control."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "test": "five_job_local_concurrency",
+  "result": "passed",
+  "jobs_submitted": 5,
+  "jobs_completed": 5,
+  "max_simultaneously_active": 5,
+  "elapsed_seconds": 0.405,
+  "execution_scope": "local thread-pool test; no Celesto guests used",
+  "jobs": [
+    {
+      "job_id": 1,
+      "status": "completed"
+    },
+    {
+      "job_id": 2,
+      "status": "completed"
+    },
+    {
+      "job_id": 3,
+      "status": "completed"
+    },
+    {
+      "job_id": 4,
+      "status": "completed"
+    },
+    {
+      "job_id": 5,
+      "status": "completed"
+    }
+  ],
+  "limitations": [
+    "This verifies local concurrent execution only, not API-level job scheduling or database persistence."
+  ]
+}
