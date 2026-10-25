@@ -1,0 +1,4 @@
+{"ts":"2026-10-22T09:01:00Z","event":"workflow_start","step":1,"policy":"resume"}
+{"ts":"2026-10-22T09:01:30Z","event":"step_7_failure","step":7,"detail":"Injected failure for recovery verification"}
+{"ts":"2026-10-22T09:01:45Z","event":"policy_applied","step":7,"policy":"resume","status":"ok"}
+{"ts":"2026-10-22T09:02:00Z","event":"recovery_complete","step":8,"policy":"resume","status":"ok"}

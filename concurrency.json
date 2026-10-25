@@ -1,0 +1,5 @@
+{
+  "supported": false,
+  "limitation": "This environment did not allow a real five-job concurrent Celesto run, so concurrency was not validly exercised. The job list is intentionally empty to avoid fabricating evidence.",
+  "jobs": []
+}

@@ -1,0 +1,6 @@
+{
+  "cleanup_on_success": false,
+  "cleanup_on_failure": false,
+  "cleanup_on_interrupt": false,
+  "sandbox_names": ["sbx-seeddemo1"]
+}

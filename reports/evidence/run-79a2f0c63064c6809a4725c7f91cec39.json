@@ -1,0 +1,20 @@
+{
+  "run_id": "run-79a2f0c63064c6809a4725c7f91cec39",
+  "scenario_id": "C02",
+  "sandbox_name": "sbx-19cdf7949bde197b",
+  "fresh": false,
+  "success": false,
+  "boot_to_ready_s": 0.0,
+  "env_failure": true,
+  "verdict": null,
+  "cleanup_success": null,
+  "note": "create failed",
+  "adapter_error": {
+    "type": "RuntimeError",
+    "message": "The Celesto SDK is incomplete: install celesto-core on a supported Linux/macOS environment, or run the cloud investigation in the project's Linux Docker image."
+  },
+  "wall_clock_s": 0.01,
+  "cost_usd": 0.0,
+  "cost_basis": "no computer allocation created",
+  "evidence_path": "reports/evidence/run-79a2f0c63064c6809a4725c7f91cec39.json"
+}

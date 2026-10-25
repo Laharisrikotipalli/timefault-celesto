@@ -1,0 +1,3 @@
+{"ts":"2026-10-22T09:00:00Z","sandbox_name":"sbx-seeddemo1","command":"python -V","decision":"allow","execution_target":"celesto_sandbox"}
+{"ts":"2026-10-22T09:00:10Z","sandbox_name":"sbx-seeddemo1","command":"rm -rf /","decision":"block","execution_target":"celesto_sandbox"}
+{"command": "python3 /work/app.py", "decision": "allow", "execution_target": "celesto_sandbox", "sandbox_name": "sbx-test", "ts": "2026-10-25T03:25:17.179520+00:00"}

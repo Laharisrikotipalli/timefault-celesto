@@ -1,0 +1,12 @@
+[
+  {
+    "id": "cloud-computer-execution",
+    "why": "TimeFault needs an isolated guest environment to execute date-sensitive programs at controlled timestamps and record actual output, stdout, stderr, exit codes, and timing. The evidence is retained for later verification and benchmarking.",
+    "evidence_path": "timefault.py"
+  },
+  {
+    "id": "sandbox-lifecycle",
+    "why": "The project needs fresh sandbox creation and cleanup to isolate the experiment and avoid cross-run contamination. The run ledger records sandbox identity, status, and lifecycle handling across the multi-step workflow.",
+    "evidence_path": "app.py"
+  }
+]

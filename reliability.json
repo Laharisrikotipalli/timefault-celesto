@@ -1,0 +1,27 @@
+{
+  "run_count": 2,
+  "runs": [
+    {
+      "sandbox_name": "sbx-fresh01",
+      "fresh": true,
+      "success": true,
+      "wall_clock_s": 12.5,
+      "boot_to_ready_s": 7.5,
+      "cost_usd": 0.12
+    },
+    {
+      "sandbox_name": "sbx-fresh02",
+      "fresh": true,
+      "success": false,
+      "wall_clock_s": 14.0,
+      "boot_to_ready_s": 8.0,
+      "cost_usd": 0.08
+    }
+  ],
+  "success_rate": 0.5,
+  "wall_clock_s": [12.5, 14.0],
+  "median_runtime_s": 13.25,
+  "p90_runtime_s": 14.0,
+  "total_cost": 0.2,
+  "postmortem_path": "postmortem.md"
+}

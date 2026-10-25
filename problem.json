@@ -1,0 +1,7 @@
+{
+  "who": "TimeFault AI engineering and reliability team running a verified code-inspection and oracle-validation workflow.",
+  "agent_work": "The agent inspects temporal logic, schedules focused experiments, cross-checks each result with an independent oracle, and packages a replayable regression reproduction.",
+  "proof_output": "The run ledger and evidence files record the observed timestamps, results, and benchmark execution details.",
+  "idea_source": "original",
+  "pitch": "TimeFault AI is an agent that reads date-sensitive code, finds the window in which a bug fails and where it recovers, checks its verdicts against a separate oracle, and produces a replay package that runs without Celesto."
+}

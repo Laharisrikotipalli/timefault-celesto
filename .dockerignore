@@ -1,0 +1,10 @@
+*
+!requirements.txt
+!requirements-cloud.txt
+!app.py
+!agent/
+!agent/**
+!fixtures/
+!fixtures/**
+!oracle/
+!oracle/**

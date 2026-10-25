@@ -1,0 +1,155 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install TimeFault frontend dependencies",
+			"type": "shell",
+			"command": "Set-Location frontend; npm install",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate TimeFault frontend",
+			"type": "shell",
+			"command": "Set-Location frontend; npm run validate",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start TimeFault frontend",
+			"type": "shell",
+			"command": "Set-Location frontend; npm run dev -- --host 127.0.0.1",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"owner": "vite",
+					"pattern": {
+						"regexp": "^$"
+					},
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".*",
+						"endsPattern": "Local:.*"
+					}
+				}
+			]
+		},
+		{
+			"label": "Start TimeFault API",
+			"type": "shell",
+			"command": "python -m uvicorn app:app --host 127.0.0.1 --port 8000",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Validate frontend from repo root",
+			"type": "shell",
+			"command": "cd frontend && npm run validate",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Check API health and run records",
+			"type": "shell",
+			"command": "cmd /c \"curl -sS http://127.0.0.1:8000/health && echo. && curl -sS http://127.0.0.1:8000/api/runs\"",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify API + frontend validation",
+			"type": "shell",
+			"command": "cmd /c \"curl -sS http://127.0.0.1:8000/health & echo. & curl -sS http://127.0.0.1:8000/api/runs & echo. & cd /d c:\\Users\\lahar\\OneDrive\\Desktop\\timefault-celesto\\frontend & npm run validate\"",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run frontend validation",
+			"type": "shell",
+			"command": "npm --prefix frontend run validate",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Check local API endpoints",
+			"type": "shell",
+			"command": "Invoke-RestMethod http://127.0.0.1:8000/health | ConvertTo-Json -Depth 5; Invoke-RestMethod http://127.0.0.1:8000/api/runs | ConvertTo-Json -Depth 5",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Probe TimeFault API and Vite",
+			"type": "shell",
+			"command": "try { $h = Invoke-RestMethod http://127.0.0.1:8001/health -TimeoutSec 5; Write-Output ('HEALTH ' + ($h | ConvertTo-Json -Compress)); $r = Invoke-RestMethod http://127.0.0.1:8001/api/runs -TimeoutSec 5; Write-Output ('RUNS ' + ($r | ConvertTo-Json -Compress -Depth 8)) } catch { Write-Output ('API_ERROR ' + $_.Exception.Message) }; foreach ($port in 5173,4173) { try { $page = Invoke-WebRequest ('http://127.0.0.1:' + $port) -TimeoutSec 3 -UseBasicParsing; Write-Output ('VITE ' + $port + ' ' + $page.StatusCode) } catch { Write-Output ('VITE ' + $port + ' unavailable') } }",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Frontend validation suite",
+			"type": "shell",
+			"command": "npm --prefix frontend run validate",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Check API CORS headers",
+			"type": "shell",
+			"command": "try { $response = Invoke-WebRequest http://127.0.0.1:8001/health -Headers @{ Origin = 'http://127.0.0.1:5173' } -TimeoutSec 5 -UseBasicParsing; Write-Output ('STATUS ' + $response.StatusCode); Write-Output ('ALLOW_ORIGIN ' + $response.Headers['Access-Control-Allow-Origin']) } catch { Write-Output ('CORS_PROBE_ERROR ' + $_.Exception.Message) }; try { $response = Invoke-WebRequest http://127.0.0.1:8001/api/runs -Method Options -Headers @{ Origin = 'http://127.0.0.1:5173'; 'Access-Control-Request-Method' = 'POST'; 'Access-Control-Request-Headers' = 'content-type' } -TimeoutSec 5 -UseBasicParsing; Write-Output ('OPTIONS ' + $response.StatusCode); Write-Output ('OPTIONS_ALLOW_ORIGIN ' + $response.Headers['Access-Control-Allow-Origin']) } catch { Write-Output ('OPTIONS_ERROR ' + $_.Exception.Message) }",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start frontend with API proxy",
+			"type": "shell",
+			"command": "npm --prefix frontend run dev -- --host 127.0.0.1 --port 5173 --strictPort",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Create integration test run via API",
+			"type": "shell",
+			"command": "$body = @{ scenario_id = 'CF-17' } | ConvertTo-Json -Compress; $created = Invoke-RestMethod http://127.0.0.1:8001/api/runs -Method Post -ContentType 'application/json' -Body $body -TimeoutSec 10; Write-Output ('CREATED ' + ($created | ConvertTo-Json -Compress)); $runs = Invoke-RestMethod http://127.0.0.1:8001/api/runs -TimeoutSec 10; Write-Output ('LIST_CONFIRMED ' + (($runs.runs | Where-Object { $_.run_id -eq $created.run_id } | ConvertTo-Json -Compress)))",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify frontend proxy",
+			"type": "shell",
+			"command": "$health = Invoke-RestMethod http://127.0.0.1:5173/health -TimeoutSec 10; Write-Output ('PROXY_HEALTH ' + ($health | ConvertTo-Json -Compress)); $runs = Invoke-RestMethod http://127.0.0.1:5173/api/runs -TimeoutSec 10; Write-Output ('PROXY_RUN_COUNT ' + $runs.count); Write-Output ('PROXY_CF17 ' + (($runs.runs | Where-Object { $_.scenario_id -eq 'CF-17' } | Measure-Object).Count))",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify local runner path containment",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe agent\\run_local_fixtures.py --only C01 --output ..\\outside.jsonl",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Final Python suite with path guard",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe -m pytest -q",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Compose configuration validation",
+			"type": "shell",
+			"command": "$env:POSTGRES_PASSWORD='temp-only'; $env:DATABASE_URL='postgresql://timefault:temp-only@db:5432/timefault'; docker compose config --quiet; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; Write-Output 'compose config valid'",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

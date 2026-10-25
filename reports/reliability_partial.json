@@ -1,0 +1,29 @@
+{
+  "run_count": 2,
+  "runs": [
+    {
+      "run_id": "run-8d12586fcef5f5201282e1a39f982b2c",
+      "sandbox_name": "sbx-57f274f9f72a8318",
+      "fresh": false,
+      "success": false,
+      "wall_clock_s": 1.29,
+      "boot_to_ready_s": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "run_id": "run-79a2f0c63064c6809a4725c7f91cec39",
+      "sandbox_name": "sbx-19cdf7949bde197b",
+      "fresh": false,
+      "success": false,
+      "wall_clock_s": 0.01,
+      "boot_to_ready_s": 0.0,
+      "cost_usd": 0.0
+    }
+  ],
+  "success_rate": 0.0,
+  "median_wall_clock_s": 0.65,
+  "p90_wall_clock_s": 1.29,
+  "median_boot_to_ready_s": 0.0,
+  "total_cost_usd": 0.0,
+  "postmortem_path": "reports/postmortem.md"
+}

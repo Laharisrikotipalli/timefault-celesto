@@ -1,0 +1,20 @@
+{"bug_file": "app.py", "bug_line": 5, "definition_source": "reconstructed from documented behavior", "expected_label": "date_bug", "scenario_id": "L01", "window": ["2028-02-29", "2028-02-29"]}
+{"bug_file": "app.py", "bug_line": 4, "expected_label": "date_bug", "scenario_id": "L02", "window": ["2028-01-01", "2028-12-31"]}
+{"bug_file": "app.py", "bug_line": 4, "expected_label": "date_bug", "scenario_id": "L03", "window": ["2028-02-29", "2028-02-29"]}
+{"bug_file": "app.py", "bug_line": 5, "expected_label": "date_bug", "scenario_id": "L04", "window": ["2100-01-01", "2100-12-31"]}
+{"bug_file": "app.py", "bug_line": 5, "expected_label": "date_bug", "scenario_id": "M01", "window": ["2028-01-30", "2028-01-31"]}
+{"bug_file": "app.py", "bug_line": 4, "expected_label": "date_bug", "scenario_id": "M02", "window": ["2027-12-01", "2027-12-31"]}
+{"bug_file": "app.py", "bug_line": 5, "expected_label": "date_bug", "scenario_id": "M03", "window": ["2027-02-01", "2200-02-28"]}
+{"bug_file": "app.py", "bug_line": 5, "expected_label": "date_bug", "scenario_id": "M04", "window": ["2028-02-29", "2028-11-30"]}
+{"bug_file": "app.py", "bug_line": 7, "expected_label": "date_bug", "scenario_id": "E01", "window": ["2028-06-01", "2028-06-01"]}
+{"bug_file": "app.py", "bug_line": 4, "expected_label": "date_bug", "scenario_id": "E02", "window": ["2038-01-19", "2200-12-31"]}
+{"bug_file": "app.py", "bug_line": 6, "expected_label": "date_bug", "scenario_id": "E03", "window": ["2028-03-01", "2028-03-01"]}
+{"bug_file": "app.py", "bug_line": 5, "expected_label": "date_bug", "scenario_id": "E04", "window": ["2069-01-01", "2200-12-31"]}
+{"bug_file": null, "bug_line": null, "definition_source": "reconstructed from documented behavior", "expected_label": "clean", "scenario_id": "C01", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "clean", "scenario_id": "C02", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "clean", "scenario_id": "C03", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "clean", "scenario_id": "C04", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "not_date_bug", "scenario_id": "F01", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "not_date_bug", "scenario_id": "F02", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "not_date_bug", "scenario_id": "F03", "window": null}
+{"bug_file": null, "bug_line": null, "expected_label": "not_date_bug", "scenario_id": "F04", "window": null}

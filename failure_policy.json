@@ -1,0 +1,7 @@
+{
+  "failed_step": 7,
+  "total_steps": 10,
+  "policy": "resume",
+  "rationale": "The workflow was intentionally designed to fail at step 7 to verify that the recovery logic records the injected failure, applies the selected recovery policy, and preserves the evidence and artifacts. The resume policy is appropriate because the prior work is still valid and the workflow can continue from the last confirmed checkpoint without re-initializing the entire run. The trace records the failure and the policy outcome. The decision is grounded in the run ledger and artifact integrity checks.",
+  "trace_path": "failure_trace.jsonl"
+}
