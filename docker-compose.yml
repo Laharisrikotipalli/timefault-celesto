@@ -1,28 +1,73 @@
+
 services:
-  api:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in .env}
-      API_PORT: "8080"
-    depends_on:
-      db:
-        condition: service_healthy
-  db:
+  ledger:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-timefault}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      POSTGRES_DB: ${POSTGRES_DB:-timefault}
-    ports:
-      - "127.0.0.1:5432:5432"
+      POSTGRES_DB: timefault
+      POSTGRES_USER: timefault
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-dev-only-change-me}
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ledger_data:/var/lib/postgresql/data
+      - ./seeds/01_runs.sql:/docker-entrypoint-initdb.d/01_runs.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-timefault} -d ${POSTGRES_DB:-timefault}"]
+      test: ["CMD-SHELL", "pg_isready -U timefault -d timefault"]
       interval: 5s
-      timeout: 5s
-      retries: 10
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      API_PORT: "8000"
+      DATABASE_URL: postgresql://timefault:${POSTGRES_PASSWORD:-local-dev-only-change-me}@ledger:5432/timefault
+    ports:
+      - "127.0.0.1:8001:8000"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    depends_on:
+      ledger:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      DATABASE_URL: postgresql://timefault:${POSTGRES_PASSWORD:-local-dev-only-change-me}@ledger:5432/timefault
+      CELESTO_PROVIDER: ${CELESTO_PROVIDER:-cloud}
+      CELESTO_API_KEY: ${CELESTO_API_KEY:-}
+      CELESTO_BACKEND: ${CELESTO_BACKEND:-firecracker}
+      TIMEFAULT_CELESTO_TRANSPORT: ${TIMEFAULT_CELESTO_TRANSPORT:-cli}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      WORKER_SCENARIO_IDS: ${WORKER_SCENARIO_IDS:-C01}
+      WORKER_MAX_RUNS: ${WORKER_MAX_RUNS:-1}
+      # The worker refuses to start unless this is exactly "yes" (it creates billable computers).
+      WORKER_CONFIRM_CLOUD: ${WORKER_CONFIRM_CLOUD:-}
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: "no"
+
 volumes:
-  pgdata:
+  ledger_data:

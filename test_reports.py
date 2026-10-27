@@ -235,6 +235,7 @@ def test_readme_headings():
 
 
 def test_celesto_adapter_uses_cloud_computer_sdk_and_cleans_up(monkeypatch, tmp_path):
+    monkeypatch.setenv("TIMEFAULT_CELESTO_TRANSPORT", "sdk")
     import sys
     from types import ModuleType, SimpleNamespace
 

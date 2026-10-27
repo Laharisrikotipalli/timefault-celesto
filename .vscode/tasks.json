@@ -61,7 +61,7 @@
 		{
 			"label": "Verify API + frontend validation",
 			"type": "shell",
-			"command": "cmd /c \"curl -sS http://127.0.0.1:8000/health & echo. & curl -sS http://127.0.0.1:8000/api/runs & echo. & cd /d c:\\Users\\lahar\\OneDrive\\Desktop\\timefault-celesto\\frontend & npm run validate\"",
+			"command": "cmd /c \"curl -sS http://127.0.0.1:8000/health & echo. & curl -sS http://127.0.0.1:8000/api/runs & echo. & cd /d ${workspaceFolder}\\frontend & npm run validate\"",
 			"isBackground": false,
 			"problemMatcher": [],
 			"group": "build"
