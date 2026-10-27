@@ -8,3 +8,8 @@
 !fixtures/**
 !oracle/
 !oracle/**
+!requirements-api.txt
+!api/
+!api/**
+!seeds/
+!seeds/**

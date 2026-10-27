@@ -34,3 +34,17 @@ build/
 # OS/editor files
 .DS_Store
 Thumbs.db
+
+# Runner-generated backups and temp files (kept locally, not committed)
+*.backup-*
+.*.tmp
+
+# Vendored third-party wheel (install celesto from PyPI instead; see README)
+wheels/
+
+# Personal editor workspace files (contain local paths)
+*.code-workspace
+
+# Local-only scratch
+tmp/
+*.log

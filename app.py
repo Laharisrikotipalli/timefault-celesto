@@ -60,5 +60,7 @@ def create_run(payload: RunCreate) -> dict:
         raise HTTPException(status_code=400, detail="invalid sandbox name")
     if payload.execution_target != "celesto_sandbox":
         raise HTTPException(status_code=400, detail="invalid execution target")
+    if any(run["run_id"] == payload.run_id for run in RUNS):
+        raise HTTPException(status_code=409, detail="run_id already exists")
     RUNS.append(payload.model_dump())
     return payload.model_dump()

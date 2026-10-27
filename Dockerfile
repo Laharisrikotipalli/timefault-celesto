@@ -1,10 +1,17 @@
 FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 WORKDIR /app
-COPY requirements.txt requirements-cloud.txt ./
-RUN pip install --no-cache-dir --retries 5 --timeout 120 -r requirements-cloud.txt
-COPY app.py ./
-COPY agent/ ./agent/
+ENV PYTHONPATH=/app
+
+RUN pip install --no-cache-dir 'psycopg[binary]==3.2.10'
+
+COPY api/ ./api/
 COPY fixtures/ ./fixtures/
 COPY oracle/ ./oracle/
-EXPOSE 8080
-CMD ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+COPY seeds/ ./seeds/
+
+EXPOSE 8000
+
+CMD ["python", "api/server.py"]

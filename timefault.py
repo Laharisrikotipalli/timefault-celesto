@@ -1,3 +1,10 @@
+"""SCAFFOLD / MOCKS. Nothing in this module is evidence of any experiment.
+
+CelestoClient, TimeController, SandboxManager and BenchmarkRunner are placeholders
+that never contact Celesto and never observe a guest clock. They are kept so the
+original design sketch still imports. Real execution lives in agent/.
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -79,19 +86,21 @@ class TimeController:
         self.observed_timestamps: List[str] = []
 
     def check_capabilities(self) -> Dict[str, Any]:
-        return {"mechanism": self.mechanism, "available": True, "observed": "verified"}
+        return {"mechanism": self.mechanism, "available": False, "observed": "not_verified", "mock": True}
 
     def set_test_time(self, timestamp: str) -> str:
         self.requested_timestamps.append(timestamp)
         return timestamp
 
     def verify_observed_time(self, expected_timestamp: str) -> bool:
-        self.observed_timestamps.append(expected_timestamp)
-        return True
+        raise NotImplementedError(
+            "mock TimeController cannot observe a guest clock; "
+            "use agent.investigate.verify_time_control against a real guest"
+        )
 
     def run_with_time(self, command: str, timestamp: str) -> Dict[str, Any]:
         self.set_test_time(timestamp)
-        return {"command": command, "requested_timestamp": timestamp, "mechanism": self.mechanism, "verified": self.verify_observed_time(timestamp)}
+        return {"command": command, "requested_timestamp": timestamp, "mechanism": self.mechanism, "verified": False, "executed": False, "mock": True}
 
     def restore_or_discard(self) -> Dict[str, Any]:
         return {"mechanism": self.mechanism, "restored": True}
@@ -108,10 +117,10 @@ class CelestoClient:
     def create_sandbox(self, name: str | None = None) -> Dict[str, Any]:
         if not name:
             name = f"sbx-{hashlib.sha1(os.urandom(8)).hexdigest()[:8]}"
-        return {"sandbox_name": name, "status": "ready", "execution_target": "celesto_sandbox"}
+        return {"sandbox_name": name, "status": "mock_not_created", "execution_target": "mock", "mock": True}
 
     def run_command(self, sandbox_name: str, command: str) -> Dict[str, Any]:
-        return {"sandbox_name": sandbox_name, "command": command, "exit_code": 0, "stdout": "ok", "stderr": "", "status": "succeeded"}
+        return {"sandbox_name": sandbox_name, "command": command, "exit_code": None, "stdout": "", "stderr": "", "status": "mock_not_executed", "mock": True}
 
 
 class SandboxManager:
@@ -193,10 +202,17 @@ class RecoveryPolicy:
 
 
 class BenchmarkRunner:
-    def __init__(self, fixtures: Optional[List[Dict[str, Any]]] = None):
+    """Synthetic record generator for UI/layout demos only. Disabled by default."""
+
+    def __init__(self, fixtures: Optional[List[Dict[str, Any]]] = None, allow_synthetic: bool = False):
         self.fixtures = fixtures or []
+        self.allow_synthetic = allow_synthetic
 
     def run(self) -> List[RunRecord]:
+        if not self.allow_synthetic:
+            raise RuntimeError(
+                "BenchmarkRunner produces synthetic numbers; use agent/run_benchmark.py for real runs"
+            )
         runs: List[RunRecord] = []
         for idx, fixture in enumerate(self.fixtures, start=1):
             runs.append(
@@ -205,7 +221,7 @@ class BenchmarkRunner:
                     sandbox_name=f"sbx-fresh{idx:02d}",
                     problem_id=fixture.get("id", f"CF-{idx:02d}"),
                     state="succeeded",
-                    execution_target="celesto_sandbox",
+                    execution_target="synthetic_mock",
                     success=True,
                     wall_clock_s=12.0 + idx,
                     boot_to_ready_s=7.0 + idx / 2,
@@ -246,13 +262,10 @@ class TimeFaultAI:
         return self.inspector.inspect()
 
     def verify_time(self, timestamp: str) -> bool:
-        return self.time_controller.verify_observed_time(timestamp)
+        return self.time_controller.verify_observed_time(timestamp)  # raises: mock
 
     def run_experiment(self, fixture: Dict[str, Any], timestamp: str) -> Dict[str, Any]:
-        cmd = fixture.get("command", "python -V")
-        result = self.time_controller.run_with_time(cmd, timestamp)
-        verdict = self.oracle.evaluate("date bug confirmed at 2024-02-29", fixture)
-        return {"cmd": cmd, "timestamp": timestamp, "verified": result["verified"], "verdict": verdict}
+        raise NotImplementedError("mock experiment path removed; use agent/investigate.py")
 
 
 if __name__ == "__main__":

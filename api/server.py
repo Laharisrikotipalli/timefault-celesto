@@ -1,41 +1,21 @@
 import json
 import os
-import uuid
-from datetime import timezone
+import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.parse import urlparse
 
-import psycopg
-from psycopg.rows import dict_row
+_ROOT = Path(__file__).resolve().parent.parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL environment variable is required")
-
-
-def get_connection():
-    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
-
-
-def serialize_run(row):
-    return {
-        "run_id": str(row["run_id"]),
-        "scenario_id": row["scenario_id"],
-        "status": row["status"],
-        "created_at": row["created_at"].astimezone(timezone.utc).isoformat(),
-    }
+from api import run_store  # noqa: E402
+from api.scenarios import get_scenario  # noqa: E402
+from api.run_store import serialize_run  # noqa: E402,F401
 
 
 def read_runs():
-    with get_connection() as conn:
-        rows = conn.execute(
-            """
-            SELECT run_id, scenario_id, status, created_at
-            FROM runs
-            ORDER BY created_at DESC
-            """
-        ).fetchall()
-    return [serialize_run(row) for row in rows]
+    return run_store.list_runs()
 
 
 def create_run(payload):
@@ -43,17 +23,9 @@ def create_run(payload):
     if not isinstance(scenario, str) or not scenario.strip():
         raise ValueError("scenario_id must be a non-empty string")
 
-    run_id = uuid.uuid4()
-    with get_connection() as conn:
-        row = conn.execute(
-            """
-            INSERT INTO runs (run_id, scenario_id, status)
-            VALUES (%s, %s, 'queued')
-            RETURNING run_id, scenario_id, status, created_at
-            """,
-            (run_id, scenario.strip()),
-        ).fetchone()
-    return serialize_run(row)
+    scenario_id = scenario.strip()
+    get_scenario(scenario_id)
+    return run_store.create_run(scenario_id)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -69,8 +41,7 @@ class Handler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         if path == "/health":
             try:
-                with get_connection() as conn:
-                    conn.execute("SELECT 1")
+                run_store.check_database()
                 return self.send_json(200, {"status": "ok", "database": "ok"})
             except Exception:
                 return self.send_json(503, {"status": "error", "database": "unavailable"})
@@ -81,6 +52,19 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send_json(200, {"runs": runs, "count": len(runs)})
             except Exception:
                 return self.send_json(500, {"error": "database query failed"})
+
+        prefix = "/api/runs/"
+        if path.startswith(prefix):
+            run_id = path[len(prefix):]
+            try:
+                run = run_store.get_run(run_id)
+            except ValueError:
+                run = None
+            except Exception:
+                return self.send_json(500, {"error": "database query failed"})
+            if run is None:
+                return self.send_json(404, {"error": "run not found"})
+            return self.send_json(200, run)
         return self.send_json(404, {"error": "not found"})
 
     def do_POST(self):
@@ -88,17 +72,23 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(404, {"error": "not found"})
 
         try:
-            length = int(self.headers.get("Content-Length", "0"))
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+            except ValueError:
+                return self.send_json(400, {"error": "invalid request body size"})
             if length < 1 or length > 100_000:
                 return self.send_json(400, {"error": "invalid request body size"})
 
-            payload = json.loads(self.rfile.read(length))
+            try:
+                payload = json.loads(self.rfile.read(length))
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                return self.send_json(400, {"error": "invalid JSON body"})
             if not isinstance(payload, dict):
                 return self.send_json(400, {"error": "JSON object required"})
 
             run = create_run(payload)
             return self.send_json(201, run)
-        except (ValueError, json.JSONDecodeError) as exc:
+        except ValueError as exc:
             return self.send_json(400, {"error": str(exc)})
         except Exception:
             return self.send_json(500, {"error": "database operation failed"})
@@ -108,13 +98,14 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    run_store.apply_migrations()
     port = int(os.environ.get("API_PORT", "8000"))
     server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
     print(f"TimeFault API listening on port {port}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\\nShutdown requested")
+        print("\nShutdown requested")
     finally:
         server.server_close()
         print("HTTP server closed")
